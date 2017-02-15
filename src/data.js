@@ -1,3 +1,13 @@
+const endpoints = {
+	all: {},
+	reps: {
+		state: `http://whoismyrepresentative.com/getall_reps_bystate.php?output=json&state=`
+	},
+	sens: {
+		state: `http://whoismyrepresentative.com/getall_sens_bystate.php?output=json&state=`
+	}
+}
+
 const states = [
 	{ stateName:'Alabama', abbv: 'AL' },
 	{ stateName:'Alaska', abbv: 'AK' },
@@ -52,3 +62,5 @@ const states = [
 ]
 
 export default states;
+
+export { endpoints }

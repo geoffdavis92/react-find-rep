@@ -1,8 +1,12 @@
 import React, { Component } from 'react'
 import AJAX from 'ajax.js'
 
-import states from './data.js'
+import states, { endpoints } from './data.js'
+import { scrapeForm } from './utilities'
+
 import './Form.css'
+
+const { get } = AJAX;
 
 export class FormGroup extends Component {
 	render() {
@@ -19,7 +23,6 @@ export default class Form extends Component {
 	}
 	handleBlur(e) {
 		const { value, id } = e.target
-		console.log(value)
 		if (value) {
 			this.setState({
 				[`${id}HasValue`]: true
@@ -32,14 +35,22 @@ export default class Form extends Component {
 	}
 	handleFormSubmission(e) {
 		e.preventDefault();
+		const { reps, sens } = endpoints,
+			  { state, queryType } = scrapeForm(this.Form);
+		if (queryType === 'both') {} else {
+			console.log(`${endpoints[queryType].state}${state}`)
+			get(`${endpoints[queryType].state}${state}`,null,res => {
+				console.log(res)
+			})
+		}
 	}
 	render() {
 		const stateOptions = states.map( state => {
 			const { stateName, abbv } = state;
-			return <option value={{stateName, abbv}}>{state.abbv}</option>
+			return <option value={abbv}>{state.abbv}</option>
 		})
 		return(
-			<form id="react-fyr-form" onSubmit={this.handleFormSubmission}>
+			<form id="react-fyr-form" onSubmit={this.handleFormSubmission} ref={ref=>this.Form=ref}>
 				<FormGroup>
 					<select name="state" id="state" required className={this.state.stateHasValue ? 'field-has-value' : null} onBlur={this.handleBlur}>
 						<optgroup label="Select State...">
@@ -61,7 +72,7 @@ export default class Form extends Component {
 					<label htmlFor="queryType" className="icon-dropdown">&#10095;</label>
 				</FormGroup>
 				<FormGroup>
-					<input type="submit" value="Go&nbsp;&#10095;" onClick={this.handleFormSubmission}/>
+					<input name="Submit" type="submit" value="Go&nbsp;&#10095;" onClick={this.handleFormSubmission}/>
 				</FormGroup>
 			</form>
 		)
