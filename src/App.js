@@ -3,6 +3,14 @@ import './App.css';
 import Form from './Form.js';
 
 class App extends Component {
+  constructor() {
+    super()
+    this.state = { results:{} }
+    this.handleAPICall = this.handleAPICall.bind(this)
+  }
+  handleAPICall(apiData) {
+    console.log(apiData)
+  }
   render() {
     return (
       <div className="App">
@@ -10,7 +18,7 @@ class App extends Component {
           <h2>Find Your Representative</h2>
         </div>
         <div className="App-body">
-          <Form/>
+          <Form onAPICall={this.handleAPICall}/>
         </div>
         {/*<p className="App-intro"></p>*/}
       </div>

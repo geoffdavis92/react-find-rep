@@ -178,16 +178,23 @@ export default class Form extends Component {
 	handleFormSubmission(e) {
 		e.preventDefault();
 		// eslint-disable-next-line
-		const { reps, sens } = endpoints,
+		const { zipSearch, repsByState, senByState } = endpoints,
 			  { zip, state, queryType } = scrapeForm(this.Form);
 		console.log(zip, state, queryType)
-
-		// if (queryType === 'both') {} else {
-		// 	console.log(`${endpoints[queryType]}${location}`)
-		// 	get(`${endpoints[queryType]}${location}`,null,res => {
-		// 		console.log(res)
-		// 	})
-		// }
+		if (zip) {
+			get(`${zipSearch}${zip}`,null,res => {
+				console.log(res)
+			});
+		} else {
+			const onAPICall = this.props.onAPICall
+			get(`${repsByState}${state}`,null,res => {
+				const stateReps = res
+				get(`${senByState}${state}`,null,res => {
+					const stateSens = res
+					onAPICall({reps:stateReps,senators:stateSens})
+				})
+			})
+		}
 	}
 	render() {
 		const stateOptions = states.map( (state,i) => {
