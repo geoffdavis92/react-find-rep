@@ -38,8 +38,8 @@ export default class Form extends Component {
 		const { reps, sens } = endpoints,
 			  { state, queryType } = scrapeForm(this.Form);
 		if (queryType === 'both') {} else {
-			console.log(`${endpoints[queryType].state}${state}`)
-			get(`${endpoints[queryType].state}${state}`,null,res => {
+			console.log(`${endpoints[queryType]}${state}`)
+			get(`${endpoints[queryType]}${state}`,null,res => {
 				console.log(res)
 			})
 		}
