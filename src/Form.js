@@ -33,11 +33,6 @@ export default class Form extends Component {
 		this.handleFormSubmission = this.handleFormSubmission.bind(this)
 		this.handleInput = this.handleInput.bind(this)
 		this.handleBlur = this.handleBlur.bind(this)
-		this.checkIfValidFields = this.checkIfValidFields.bind(this)
-	}
-	checkIfValidFields() {
-		console.log(this.state.zipIsValid && this.state.stateIsValid && this.state.queryTypeIsValid)
-		return (this.state.zipIsValid && this.state.stateIsValid && this.state.queryTypeIsValid)
 	}
 	handleInput(e) {
 		const { value, id } = e.target
@@ -80,10 +75,11 @@ export default class Form extends Component {
 					if (this.state.selectedState !== null && value !== this.state.selectedState) {
 						this.ZipField.value = null;
 						this.setState({
-							formIsValid: (true && this.state.zipIsValid && this.state.stateIsValid),
+							formIsValid: false,
 							[`stateIsValid`]: true,
 							[`selectedState`]: value,
 							[`zipIsValid`]: false,
+							[`zipHasValue`]: false,
 							[`selectedZip`]: null
 						})
 					} else {

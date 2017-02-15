@@ -14,7 +14,7 @@
   "scripts": {
     "start": "react-scripts start",
     "clean": "rm -r build docs",
-    "build": "rm -r docs; react-scripts build; mv build docs; rm -r build",
+    "build": "rm -r docs; react-scripts build; mv build docs",
     "_build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
