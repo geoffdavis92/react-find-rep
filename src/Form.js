@@ -34,6 +34,10 @@ export default class Form extends Component {
 		this.handleInput = this.handleInput.bind(this)
 		this.handleBlur = this.handleBlur.bind(this)
 	}
+	componentDidMount() {
+		const { cacheBust } = endpoints
+		get(cacheBust,null,response => console.log({ call: 'cacheBust', url: cacheBust, response }))
+	}
 	handleInput(e) {
 		const { value, id } = e.target
 		// Check if input has value

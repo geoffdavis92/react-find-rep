@@ -1,4 +1,5 @@
 const endpoints = {
+	cacheBust: `https://congress.api.sunlightfoundation.com/legislators/locate?badParam=badVal`,
 	sunlightZIPSearch: `https://congress.api.sunlightfoundation.com/legislators/locate?zip=`
 }
 
