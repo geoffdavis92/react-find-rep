@@ -1,7 +1,5 @@
 const endpoints = {
-	zipSearch: `http://whoismyrepresentative.com/getall_mems.php?output=json&zip=`,
-	repsByState: `http://whoismyrepresentative.com/getall_reps_bystate.php?output=json&state=`,
-	sensByState: `http://whoismyrepresentative.com/getall_sens_bystate.php?output=json&state=`
+	sunlightZIPSearch: `https://congress.api.sunlightfoundation.com/legislators/locate?zip=`
 }
 
 const states = [

@@ -178,23 +178,14 @@ export default class Form extends Component {
 	handleFormSubmission(e) {
 		e.preventDefault();
 		// eslint-disable-next-line
-		const { zipSearch, repsByState, senByState } = endpoints,
+		const onAPICall = this.props.onAPICall,
+			  { sunlightZIPSearch } = endpoints,
 			  { zip, state, queryType } = scrapeForm(this.Form);
-		console.log(zip, state, queryType)
-		if (zip) {
-			get(`${zipSearch}${zip}`,null,res => {
-				console.log(res)
-			});
-		} else {
-			const onAPICall = this.props.onAPICall
-			get(`${repsByState}${state}`,null,res => {
-				const stateReps = res
-				get(`${senByState}${state}`,null,res => {
-					const stateSens = res
-					onAPICall({reps:stateReps,senators:stateSens})
-				})
-			})
-		}
+		get(`${sunlightZIPSearch}${zip}`,null,response => {
+			const { results } = response
+			console.log(results)
+			onAPICall(results,JSON.stringify(results))
+		})
 	}
 	render() {
 		const stateOptions = states.map( (state,i) => {

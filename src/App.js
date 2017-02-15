@@ -5,11 +5,12 @@ import Form from './Form.js';
 class App extends Component {
   constructor() {
     super()
-    this.state = { results:{} }
+    this.state = { results: {}, resultsText: '' }
     this.handleAPICall = this.handleAPICall.bind(this)
   }
-  handleAPICall(apiData) {
-    console.log(apiData)
+  handleAPICall(data, jsonString) {
+    console.log(data, jsonString)
+    this.setState({ results: data, resultsText: jsonString })
   }
   render() {
     return (
@@ -19,8 +20,8 @@ class App extends Component {
         </div>
         <div className="App-body">
           <Form onAPICall={this.handleAPICall}/>
+          <pre>{this.state.resultsText}</pre>
         </div>
-        {/*<p className="App-intro"></p>*/}
       </div>
     );
   }
