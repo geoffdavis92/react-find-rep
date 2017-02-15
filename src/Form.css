@@ -3,8 +3,8 @@
 /* Form */
 	form#react-fyr-form {
 		margin: 1.8em auto 1em;
-		width: auto;
-		max-width: 350px;
+		/*width: auto;*/
+		max-width: 450px;
 	}
 
 /* Form Group */
@@ -65,41 +65,60 @@
 			appearance: none;
 			background-color: transparent;
 			border: 1px solid #ccc;
-			border-radius: 4px;
 			font-size: 16px;
 			line-height: 1.5em;
-			padding: .25em;
+			padding: .25em .5em;
+		}
+
+		form#react-fyr-form .form-group input[type="text"] {
+			width: 5em;
 		}
 
 		form#react-fyr-form .form-group select {
 			border-radius: 0;
 			color: transparent;
 			cursor: pointer;
-			min-width: 7.5em;
+			position: relative;
 		}
 
 		form#react-fyr-form .form-group input[type="submit"] {
 			background-color: crimson;
 			border: 1px solid crimson;
+			border-left: 1px solid transparent;
 			border-radius: 0 4px 4px 0;
-			display: block;
 			color: #fff;
 			cursor: pointer;
+			display: block;
 			font-size: 18px;
 			height: 34px;
 			padding: .25em .5em;
+			width: 60px;
 		}
 
-		form#react-fyr-form .form-group:nth-of-type(2) input[type="text"], form#react-fyr-form .form-group:nth-of-type(2) select, form#react-fyr-form .form-group input[type="submit"] {
-			border-right: 1px solid crimson;
-			border-left: 1px solid transparent;
-		}
+		/* Other nth inputs/select */
 
-		form#react-fyr-form .form-group:first-of-type input[type="text"], form#react-fyr-form .form-group:first-of-type select {
-			border-radius: 4px 0 0 4px;
-		}
+			form#react-fyr-form .form-group:first-of-type input[type="text"] {
+				border-radius: 4px 0 0 4px;
+			}
+
+			form#react-fyr-form .form-group:nth-of-type(2) select {
+				border-left: 1px solid transparent;
+				/*border-right: 1px solid transparent;*/
+				min-width: 7.5em;
+			}
+
+			form#react-fyr-form .form-group:nth-of-type(3) select {
+				border-left: 1px solid transparent;
+				border-right: 1px solid #ccc;
+				min-width: 12em;
+			}
+
 		
 		/* Input/Select States */
+			form#react-fyr-form .form-group input[type="text"][data-valid], form#react-fyr-form .form-group select[data-valid] {
+				border-color: #08A649;
+			}
+
 			form#react-fyr-form .form-group input[type="text"]:focus, form#react-fyr-form .form-group select:focus {
 				border-color: navy;
 				outline: none;
@@ -116,7 +135,17 @@
 				color: #333;
 			}
 
-			form#react-fyr-form .form-group input[type="submit"]:active, form#react-fyr-form .form-group input[type="submit"]:focus {
+			form#react-fyr-form .form-group input[type="submit"]:focus {
+				border: 1px dashed navy;
+				outline: none;
+			}
+
+			form#react-fyr-form .form-group input[type="submit"]:active {
 				background-color: #cb021b;
 				outline: none;
+			}
+
+			form#react-fyr-form .form-group input[type="submit"]:disabled {
+				background-color: #ccc;
+				border-color: #ccc;
 			}

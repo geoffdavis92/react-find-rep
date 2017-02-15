@@ -1,5 +1,5 @@
 const endpoints = {
-	all: {},
+	both: `http://whoismyrepresentative.com/getall_mems?output=json&zip=`,
 	reps: `http://whoismyrepresentative.com/getall_reps_bystate.php?output=json&state=`,
 	sens: `http://whoismyrepresentative.com/getall_sens_bystate.php?output=json&state=`
 }

@@ -1,3 +1,4 @@
+/* eslint-disable */
 export function scrapeForm (formElement) {
 	const formData = {},
 		  getInputValues = [].slice.call(formElement.children).forEach(formGroup => {
