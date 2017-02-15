@@ -184,7 +184,7 @@ export default class Form extends Component {
 		get(`${sunlightZIPSearch}${zip}`,null,response => {
 			const { results } = response
 			console.log(results)
-			onAPICall(results,JSON.stringify(results))
+			onAPICall({results, queryType})
 		})
 	}
 	render() {
