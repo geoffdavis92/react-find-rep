@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import Form from './Form.js';
+import ResultsTable from './ResultsTable.js';
 import { endpoints, sampleResponse, sampleResponseText } from './data'
 
 const { repLinks } = endpoints
@@ -139,8 +140,71 @@ class App extends Component {
 	}
 	render() {
 		const resultsTable = () => {
+			const colCount = 5
 			if (this.state.displayResults !== null) {
-				return (this.constructResultsTable(this.state.displayResults))
+				const { reps, sens } = this.state.displayResults,
+					  repRow = reps.map( (rep,i) => {
+					  	const {
+					  		title,
+							first_name,
+							last_name,
+							party,
+							chamber,
+							oc_email: email
+						} = rep;
+						return (
+							<tr key={i} style={{ textAlign: 'center'}}>
+								<td>{title}. {first_name} {last_name}</td>
+								<td>{party}</td>
+								<td>
+									<a className="btn" href={`mailto:${email}`}>Email</a>
+								</td>
+							</tr>
+						)
+					  }),
+					  sensRow = sens.map( (sen,i) => {
+					  	const {
+					  		title,
+							first_name,
+							last_name,
+							party,
+							chamber,
+							oc_email: email
+						} = sen;
+						return (
+							<tr key={i} style={{ textAlign: 'center'}}>
+								<td>{title}. {first_name} {last_name}</td>
+								<td>{party}</td>
+								<td>
+									<a className="btn" href={`mailto:${email}`}>Email</a>
+								</td>
+							</tr>
+						)
+					  });
+				return (
+					<table>
+						<tbody>
+							<tr>
+								<th colSpan={colCount}>Representative</th>
+							</tr>
+							<tr>
+								<th>Member</th>
+								<th>Party</th>
+								<th>Contact</th>
+							</tr>
+							{repRow}
+							<tr>
+								<th colSpan={colCount}>Senators</th>
+							</tr>
+							<tr>
+								<th>Member</th>
+								<th>Party</th>
+								<th>Contact</th>
+							</tr>
+							{sensRow}
+						</tbody>
+					</table>
+				)
 			} else {
 				return <p>No results</p>
 			}
@@ -152,7 +216,7 @@ class App extends Component {
 				</div>
 				<div className="App-body">
 					<Form onAPICall={this.handleAPICall}/>
-					{resultsTable()}
+					<ResultsTable data={this.state.displayResults}/>
 					<pre style={{fontSize: '12px'}}>{this.state.resultsText}</pre>
 				</div>
 			</div>

@@ -1,0 +1,41 @@
+table#results-table {
+	border-collapse: collapse;
+	margin: auto;
+}
+
+table#results-table th {
+	background: #eee;
+	padding: .25em .5em;
+	text-align: center;
+}
+
+table#results-table td {
+	padding: 1em .5em;
+}
+
+/* Buttons/Icons */
+	table#results-table td .btn {
+		border-radius: 4px;
+		padding: .25em .75em .33em;
+	}
+
+	table#results-table td .btn.email {
+		background-color: #333;
+		color: #666;
+	}
+
+	table#results-table td .btn.site {
+		background-color: #29e588;
+		color: #5bf888;
+	}
+
+	table#results-table td .result-icon {
+		display: inline-block;
+		max-width: 1.5em;
+		vertical-align: middle;
+	}
+
+	/* Button/Icon states */
+	table#results-table td .btn:active {
+		background-color: currentColor;
+	}
