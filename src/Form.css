@@ -4,7 +4,7 @@
 	form#react-fyr-form {
 		margin: 1.8em auto 1em;
 		/*width: auto;*/
-		max-width: 450px;
+		max-width: 280px;
 	}
 
 /* Form Group */
@@ -27,7 +27,7 @@
 	
 	/* Labels */
 		form#react-fyr-form .form-group label {
-			color: #ccc;
+			color: #999;
 			cursor: pointer;
 			font-size: .8em;
 			margin: 0;
@@ -37,7 +37,7 @@
 		}
 
 		form#react-fyr-form .form-group label.field-label {
-			color: #ccc;
+			color: #999;
 			cursor: pointer;
 			font-size: .8em;
 			margin: 0;
@@ -64,7 +64,7 @@
 		form#react-fyr-form .form-group input[type="text"], form#react-fyr-form .form-group select {
 			appearance: none;
 			background-color: transparent;
-			border: 1px solid #ccc;
+			border: 1px solid #999;
 			font-size: 16px;
 			line-height: 1.5em;
 			padding: .25em .5em;
@@ -109,7 +109,7 @@
 
 			form#react-fyr-form .form-group:nth-of-type(3) select {
 				border-left: 1px solid transparent;
-				border-right: 1px solid #ccc;
+				border-right: 1px solid #999;
 				min-width: 12em;
 			}
 
@@ -146,6 +146,6 @@
 			}
 
 			form#react-fyr-form .form-group input[type="submit"]:disabled {
-				background-color: #ccc;
-				border-color: #ccc;
+				background-color: #999;
+				border-color: #999;
 			}

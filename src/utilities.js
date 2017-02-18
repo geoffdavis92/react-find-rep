@@ -13,3 +13,7 @@ export function scrapeForm (formElement) {
 		});
 	return formData
 }
+
+export function externalLink() {
+	return { target: '_blank', rel: 'noopener noreferrer' }
+}

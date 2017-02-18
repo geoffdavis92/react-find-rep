@@ -1,6 +1,16 @@
 table#results-table {
 	border-collapse: collapse;
 	margin: auto;
+	width: 100%;
+}
+
+table#results-table.no-results td {
+	color: #ccc;
+	text-align: center;
+}
+
+table#results-table.no-results.searched td {
+	color: #333;
 }
 
 table#results-table th {
@@ -16,12 +26,27 @@ table#results-table td {
 /* Buttons/Icons */
 	table#results-table td .btn {
 		border-radius: 4px;
-		padding: .25em .75em .33em;
+		display: inline-block;
+		font-size: 24px;
+		line-height: 1em;
+		margin: auto .125em;
+		padding: .125em 0;
+		width: 1.75em;
+	}
+
+	table#results-table td .btn.fb {
+		background-color: #3b5998;
+		color: #fff;
+	}
+
+	table#results-table td .btn.tw {
+		background-color: #1da1f2;
+		color: #fff;
 	}
 
 	table#results-table td .btn.email {
 		background-color: #333;
-		color: #666;
+		color: #fff;
 	}
 
 	table#results-table td .btn.site {
@@ -37,5 +62,5 @@ table#results-table td {
 
 	/* Button/Icon states */
 	table#results-table td .btn:active {
-		background-color: currentColor;
+		opacity: .9;
 	}

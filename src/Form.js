@@ -19,14 +19,11 @@ export default class Form extends Component {
 		super()
 		this.state = { 
 			zipHasValue: false, 
-			stateHasValue: false, 
 			queryTypeHasValue: false, 
 			zipIsValid: false, 
-			stateIsValid: false, 
 			queryTypeIsValid: false,
 			formIsValid: false,
 			selectedZip: null,
-			selectedState: null,
 			selectedQueryType: null,
 			errors: []
 		}
@@ -54,7 +51,7 @@ export default class Form extends Component {
 				const pattern = new RegExp(/^[0-9]{5}$/)
 				if (pattern.test(value)) {
 					this.setState({
-						formIsValid: (true && this.state.stateIsValid && this.state.queryTypeIsValid),
+						formIsValid: (true && this.state.queryTypeIsValid),
 						[`zipIsValid`]: true,
 						[`selectedZip`]: value
 					})
@@ -66,31 +63,6 @@ export default class Form extends Component {
 					})
 				}
 			break;
-			case ('state'):
-				if (value === 'Select...') {
-					this.setState({
-						[`${id}IsValid`]: false
-					})
-				} else {
-					if (this.state.selectedState !== null && value !== this.state.selectedState) {
-						this.ZipField.value = null;
-						this.setState({
-							formIsValid: false,
-							[`stateIsValid`]: true,
-							[`selectedState`]: value,
-							[`zipIsValid`]: false,
-							[`zipHasValue`]: false,
-							[`selectedZip`]: null
-						})
-					} else {
-						this.setState({
-							formIsValid: (true && this.state.zipIsValid && this.state.queryTypeIsValid),
-							[`stateIsValid`]: true,
-							[`selectedState`]: value
-						})
-					}
-				}
-			break;
 			case ('queryType'):
 				if (value === 'Select...') {
 					this.setState({
@@ -99,7 +71,7 @@ export default class Form extends Component {
 					})
 				} else {
 					this.setState({
-						formIsValid: (true && this.state.zipIsValid && this.state.stateIsValid),
+						formIsValid: (true && this.state.zipIsValid),
 						[`queryTypeIsValid`]: true,
 						[`selectedQueryType`]: value
 					})
@@ -109,78 +81,13 @@ export default class Form extends Component {
 			break;
 		}
 	}
-	handleBlur(e) {
-		// const { value, id } = e.target
-		// // Check if input has value
-		// if (value !== '' && id && value !== 'Select...') {
-		// 	this.setState({
-		// 		[`${id}HasValue`]: true
-		// 	})
-		// // eslint-disable-next-line
-		// } else if (value === '' || value === 'Select...' && this.state[`${id}HasValue`]) {
-		// 	this.setState({
-		// 		[`${id}HasValue`]: false
-		// 	})
-		// }
-		// // Check if value is valid
-		// switch (id) {
-		// 	case 'zip':
-		// 		const pattern = new RegExp(/^[0-9]{5}$/)
-		// 		if (pattern.test(value)) {
-		// 			this.setState({
-		// 				[`zipIsValid`]: true,
-		// 				[`selectedZip`]: value
-		// 			})
-		// 		} else {
-		// 			this.setState({
-		// 				[`zipIsValid`]: false
-		// 			})
-		// 		}
-		// 	break;
-		// 	case ('state'):
-		// 		if (value === 'Select...') {
-		// 			this.setState({
-		// 				[`${id}IsValid`]: false
-		// 			})
-		// 		} else {
-		// 			if (this.state.selectedState !== null && value !== this.state.selectedState) {
-		// 				this.ZipField.value = null;
-		// 				this.setState({
-		// 					[`stateIsValid`]: true,
-		// 					[`selectedState`]: value,
-		// 					[`zipIsValid`]: false,
-		// 					[`selectedZip`]: null
-		// 				})
-		// 			} else {
-		// 				this.setState({
-		// 					[`stateIsValid`]: true,
-		// 					[`selectedState`]: value
-		// 				})
-		// 			}
-		// 		}
-		// 	break;
-		// 	case ('queryType'):
-		// 		if (value === 'Select...') {
-		// 			this.setState({
-		// 				[`${id}IsValid`]: false
-		// 			})
-		// 		} else {
-		// 			this.setState({
-		// 				[`queryTypeIsValid`]: true,
-		// 				[`selectedQueryType`]: value
-		// 			})
-		// 		}
-		// 	break;
-		// 	default:
-		// 	break;
-		// }
-	}
+	handleBlur(e) {}
 	handleFormSubmission(e) {
 		e.preventDefault();
 		// eslint-disable-next-line
 		const onAPICall = this.props.onAPICall,
 			  { sunlightZIPSearch } = endpoints,
-			  { zip, state, queryType } = scrapeForm(this.Form);
+			  { zip, queryType } = scrapeForm(this.Form);
 		get(`${sunlightZIPSearch}${zip}`,null,response => {
 			const { results } = response
 			console.log(results)
@@ -199,19 +106,11 @@ export default class Form extends Component {
 					<label htmlFor="zip" className="field-label">Enter ZIP</label>
 				</FormGroup>
 				<FormGroup>
-					<select name="state" id="state" data-valid={this.state.stateIsValid ? true : null} required className={this.state.stateHasValue ? 'field-has-value' : null} onInput={this.handleInput} onBlur={this.handleBlur}>
-						<option ref={ref => this.DisabledStateOption=ref}>Select...</option>
-						{stateOptions}
-					</select>
-					<label htmlFor="state" className="field-label">Select State</label>
-					<label htmlFor="state" className="icon-dropdown">&#10095;</label>
-				</FormGroup>
-				<FormGroup>
 					<select name="queryType" id="queryType" data-valid={this.state.queryTypeIsValid ? true : null} required className={this.state.queryTypeHasValue ? 'field-has-value' : null} onInput={this.handleInput} onBlur={this.handleBlur}>
 						<option ref={ref => this.DisabledQueryTypeOption=ref}>Select...</option>
 						<option value="reps">Representatives</option>
 						<option value="sens">Senators</option>
-						<option value="both">Both</option>
+						<option value="both">Sens & Reps</option>
 					</select>
 					<label htmlFor="queryType" className="field-label">Find me&hellip;</label>
 					<label htmlFor="queryType" className="icon-dropdown">&#10095;</label>
